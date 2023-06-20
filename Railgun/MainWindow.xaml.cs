@@ -20,5 +20,9 @@ namespace Railgun
         }
 
         private void Window_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
+
+        private void CloseButton_OnClick(object sender, RoutedEventArgs e) => Close();
+
+        private void MinimizeButton_OnClick(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
     }
 }

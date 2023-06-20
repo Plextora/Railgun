@@ -17,6 +17,14 @@
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"
     mc:Ignorable="d">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Button.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Border
         Padding="2"
         Background="#252525"
@@ -25,6 +33,25 @@
         CornerRadius="15"
         Cursor="SizeAll"
         MouseLeftButtonDown="Window_OnMouseLeftButtonDown">
-        <Grid />
+        <Grid>
+            <Button
+                x:Name="CloseButton"
+                Width="40"
+                Height="40"
+                Margin="292,10,10,292"
+                Click="CloseButton_OnClick"
+                Content="&#xE894;"
+                FontFamily="Segoe MDL2 Assets"
+                Style="{StaticResource Button}" />
+            <Button
+                x:Name="MinimizeButton"
+                Width="40"
+                Height="40"
+                Margin="247,10,55,292"
+                Click="MinimizeButton_OnClick"
+                Content="&#xE921;"
+                FontFamily="Segoe MDL2 Assets"
+                Style="{StaticResource Button}" />
+        </Grid>
     </Border>
 </Window>
