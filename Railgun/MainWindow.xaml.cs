@@ -5,6 +5,7 @@
 
 
 using System.Windows;
+using System.Windows.Input;
 
 namespace Railgun
 {
@@ -17,5 +18,7 @@ namespace Railgun
         {
             InitializeComponent();
         }
+
+        private void Window_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
     }
 }

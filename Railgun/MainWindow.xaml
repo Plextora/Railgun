@@ -11,4 +11,20 @@
     Title="Railgun"
     Width="350"
     Height="350"
-    mc:Ignorable="d" />
+    AllowsTransparency="True"
+    Background="Transparent"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Border
+        Padding="2"
+        Background="#252525"
+        BorderBrush="Transparent"
+        BorderThickness="2"
+        CornerRadius="15"
+        Cursor="SizeAll"
+        MouseLeftButtonDown="Window_OnMouseLeftButtonDown">
+        <Grid />
+    </Border>
+</Window>
