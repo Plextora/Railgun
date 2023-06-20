@@ -1,0 +1,11 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <SolidColorBrush x:Key="Indicator.Off.Background" Color="LightCoral" />
+    <SolidColorBrush x:Key="Indicator.On.Background" Color="LightGreen" />
+
+    <Style x:Key="Indicator" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource Indicator.Off.Background}" />
+        <Setter Property="Cursor" Value="Arrow" />
+    </Style>
+</ResourceDictionary>

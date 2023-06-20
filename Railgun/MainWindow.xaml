@@ -22,6 +22,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Button.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Indicator.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -52,6 +53,13 @@
                 Content="&#xE921;"
                 FontFamily="Segoe MDL2 Assets"
                 Style="{StaticResource Button}" />
+            <Border
+                x:Name="Indicator"
+                Width="20"
+                Height="20"
+                Margin="10,20,312,302"
+                CornerRadius="20"
+                Style="{StaticResource Indicator}" />
         </Grid>
     </Border>
 </Window>
