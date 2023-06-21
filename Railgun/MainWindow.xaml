@@ -23,6 +23,8 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Button.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Indicator.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Slider.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Label.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -60,6 +62,25 @@
                 Margin="10,20,312,302"
                 CornerRadius="20"
                 Style="{StaticResource Indicator}" />
+            <Slider
+                x:Name="CpsSlider"
+                Margin="59,160,59,160"
+                IsSnapToTickEnabled="True"
+                Maximum="25"
+                Minimum="10"
+                Style="{StaticResource HorizontalSlider}"
+                TickFrequency="1"
+                ValueChanged="CpsSlider_OnValueChanged"
+                Value="12" />
+            <Label
+                x:Name="CpsValue"
+                Width="75"
+                Height="30"
+                Margin="134,187,134,125"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="CPS: 25"
+                Style="{StaticResource Label}" />
         </Grid>
     </Border>
 </Window>

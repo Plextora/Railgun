@@ -24,5 +24,11 @@ namespace Railgun
         private void CloseButton_OnClick(object sender, RoutedEventArgs e) => Close();
 
         private void MinimizeButton_OnClick(object sender, RoutedEventArgs e) => WindowState = WindowState.Minimized;
+
+        private void CpsSlider_OnValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if (CpsValue != null)
+                CpsValue.Content = $"CPS: {e.NewValue}";
+        }
     }
 }
