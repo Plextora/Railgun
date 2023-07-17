@@ -1,10 +1,10 @@
-﻿using System;
+﻿#region
+
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
+
+#endregion
 
 namespace Railgun
 {
@@ -13,5 +13,17 @@ namespace Railgun
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            InitializeComponent();
+            ResourceDictionary = new Dictionary<string, ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Current.Resources.MergedDictionaries)
+            {
+                string key = dictionary.Source.OriginalString.Split(';').First().Split('/').Last().Split('.').First();
+                ResourceDictionary.Add(key, dictionary);
+            }
+        }
+
+        public static Dictionary<string, ResourceDictionary> ResourceDictionary;
     }
 }

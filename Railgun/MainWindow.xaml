@@ -18,16 +18,6 @@
     WindowStyle="None"
     mc:Ignorable="d">
 
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Button.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Indicator.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Slider.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/Railgun/Utils/Styles/Label.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <Border
         Padding="2"
         Background="#252525"
@@ -79,8 +69,14 @@
                 Margin="134,187,134,125"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
-                Content="CPS: 25"
+                Content="CPS: 12"
                 Style="{StaticResource Label}" />
+            <Button
+                x:Name="ToggleButton"
+                Margin="104,222,104,97"
+                Click="ToggleButton_OnClick"
+                Content="Toggle"
+                Style="{StaticResource Button}" />
         </Grid>
     </Border>
 </Window>
