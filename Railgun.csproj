@@ -55,6 +55,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Railgun\Utils\Classes\ClickEmulation.cs" />
     <Compile Include="Railgun\Utils\Classes\SolidColorAnimation.cs" />
     <Page Include="Railgun\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
