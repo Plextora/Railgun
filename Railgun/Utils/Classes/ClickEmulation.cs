@@ -2,6 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 #endregion
 
@@ -17,13 +18,13 @@ namespace Railgun.Utils.Classes
         [DllImport("user32.dll", SetLastError = true)]
         public static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
 
-        public static void SimulateMouseClick()
+        public static async Task SimulateMouseClick()
         {
             INPUT mouseUpInput = new INPUT();
             mouseUpInput.type = 0;
             mouseUpInput.mi.dwFlags = MouseEventFlags.MOUSEEVENT_LEFTUP;
             SendInput(1, ref mouseUpInput, Marshal.SizeOf(new INPUT()));
-
+            await Task.Delay(20);
             INPUT mouseDownInput = new INPUT();
             mouseDownInput.type = 0;
             mouseDownInput.mi.dwFlags = MouseEventFlags.MOUSEEVENT_LEFTDOWN;

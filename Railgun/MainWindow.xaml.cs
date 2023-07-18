@@ -88,12 +88,12 @@ namespace Railgun
             return Math.Round(_random.NextDouble() * (maximum - minimum) + minimum);
         }
 
-        private void Click(object sender, ElapsedEventArgs elapsedEventArgs)
+        private async void Click(object sender, ElapsedEventArgs elapsedEventArgs)
         {
             if (_isClick && _isMouseLmb)
             {
                 _timer.Interval = 1000 / GetRandomCps();
-                ClickEmulation.SimulateMouseClick();
+                await ClickEmulation.SimulateMouseClick();
             }
         }
 
