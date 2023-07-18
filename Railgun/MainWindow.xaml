@@ -55,7 +55,7 @@
                 Style="{StaticResource Indicator}" />
             <Slider
                 x:Name="CpsSlider"
-                Margin="59,160,59,160"
+                Margin="59,116,59,204"
                 IsSnapToTickEnabled="True"
                 Maximum="25"
                 Minimum="10"
@@ -67,16 +67,24 @@
                 x:Name="CpsValue"
                 Width="75"
                 Height="30"
-                Margin="134,187,134,125"
+                Margin="134,143,133,169"
                 HorizontalContentAlignment="Center"
                 VerticalContentAlignment="Center"
                 Content="CPS: 12"
                 Style="{StaticResource Label}" />
+            <Label
+                Width="300"
+                Height="30"
+                Margin="21,188,21,124"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="Use this button to specify your keybind to toggle."
+                Style="{StaticResource Label}" />
             <Button
                 x:Name="ToggleButton"
-                Margin="104,222,104,97"
+                Margin="104,223,104,96"
                 Click="ToggleButton_OnClick"
-                Content="Toggle"
+                Content="Unspecified"
                 Style="{StaticResource Button}" />
         </Grid>
     </Border>

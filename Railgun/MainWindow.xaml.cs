@@ -30,6 +30,9 @@ namespace Railgun
         private static double _cps;
         private static bool _isClick;
         private static bool _isMouseLmb;
+        private static char _keyChar;
+        private static char _displayKeyChar;
+        private static bool _isKey;
         private IKeyboardMouseEvents _globalHook;
         private readonly Random _random = new Random();
 
@@ -96,25 +99,21 @@ namespace Railgun
 
         private void ToggleButton_OnClick(object sender, RoutedEventArgs e)
         {
-            if (_isClick)
-            {
-                _isClick = false;
-                Indicator.Background =
-                    App.ResourceDictionary["Indicator"]["Indicator.Off.Background"] as SolidColorBrush;
-                _timer.Enabled = false;
-            }
-            else if (!_isClick)
-            {
-                _isClick = true;
-                Indicator.Background =
-                    App.ResourceDictionary["Indicator"]["Indicator.On.Background"] as SolidColorBrush;
-                _timer.Enabled = true;
-            }
+            ToggleButton.Content = "...";
+            _isKey = true;
         }
 
         private void ToggleKey(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 'f')
+            if (_isKey)
+            {
+                _keyChar = e.KeyChar;
+                _displayKeyChar = char.ToUpper(e.KeyChar);
+                ToggleButton.Content = _displayKeyChar;
+                _isKey = false;
+            }
+
+            if (e.KeyChar == _keyChar)
             {
                 if (_isClick == false)
                 {
