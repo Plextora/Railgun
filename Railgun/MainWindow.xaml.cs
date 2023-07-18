@@ -6,6 +6,7 @@
 #region
 
 using System;
+using System.ComponentModel;
 using System.Timers;
 using System.Windows;
 using System.Windows.Forms;
@@ -50,7 +51,20 @@ namespace Railgun
             _globalHook.KeyPress += ToggleKey;
         }
 
-        private void Window_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
+        private void Window_OnClosing(object sender, CancelEventArgs e)
+        {
+            _globalHook.MouseDown -= OnMouseDown;
+            _globalHook.MouseUp -= OnMouseUp;
+            _globalHook.KeyPress -= ToggleKey;
+
+            _globalHook.Dispose();
+            _globalHook = null;
+        }
+
+        private void Window_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
 
         private void CloseButton_OnClick(object sender, RoutedEventArgs e) => Close();
 

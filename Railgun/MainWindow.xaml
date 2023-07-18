@@ -13,6 +13,7 @@
     Height="350"
     AllowsTransparency="True"
     Background="Transparent"
+    Closing="Window_OnClosing"
     ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowStyle="None"

@@ -4,6 +4,11 @@ using System.Runtime.InteropServices;
 
 #endregion
 
+/*
+* Copyright 2023 Plextora
+* Licensed under the GPL-3.0 license (https://www.gnu.org/licenses/gpl-3.0.en.html#license-text)
+*/
+
 namespace Railgun.Utils.Classes
 {
     public static class ClickEmulation
