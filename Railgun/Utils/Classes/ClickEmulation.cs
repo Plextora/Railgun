@@ -1,5 +1,6 @@
 ﻿#region
 
+using System;
 using System.Runtime.InteropServices;
 
 #endregion
@@ -13,41 +14,45 @@ namespace Railgun.Utils.Classes
 {
     public static class ClickEmulation
     {
-        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool GetCursorPos(out MousePoint lpMousePoint);
-
-        private const int MOUSEEVENTF_LEFTDOWN = 0x02;
-        private const int MOUSEEVENTF_LEFTUP = 0x04;
+        [DllImport("user32.dll", SetLastError = true)]
+        public static extern uint SendInput(uint nInputs, ref INPUT pInputs, int cbSize);
 
         public static void SimulateMouseClick()
         {
-            MousePoint mousePos = GetCursorPosition();
-            mouse_event(MOUSEEVENTF_LEFTDOWN | MOUSEEVENTF_LEFTUP, (uint)mousePos.X, (uint)mousePos.Y, 0, 0);
-        }
+            INPUT mouseUpInput = new INPUT();
+            mouseUpInput.type = 0;
+            mouseUpInput.mi.dwFlags = MouseEventFlags.MOUSEEVENT_LEFTUP;
+            SendInput(1, ref mouseUpInput, Marshal.SizeOf(new INPUT()));
 
-        public static MousePoint GetCursorPosition()
-        {
-            bool gotPoint = GetCursorPos(out MousePoint currentMousePoint);
-            if (!gotPoint) currentMousePoint = new MousePoint(0, 0);
-            return currentMousePoint;
+            INPUT mouseDownInput = new INPUT();
+            mouseDownInput.type = 0;
+            mouseDownInput.mi.dwFlags = MouseEventFlags.MOUSEEVENT_LEFTDOWN;
+            SendInput(1, ref mouseDownInput, Marshal.SizeOf(new INPUT()));
         }
-
 
         [StructLayout(LayoutKind.Sequential)]
-        public struct MousePoint
+        public struct INPUT
         {
-            public int X;
-            public int Y;
+            public uint type;
+            public MOUSEINPUT mi;
+        }
 
-            public MousePoint(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
+        [Flags]
+        public enum MouseEventFlags : uint
+        {
+            MOUSEEVENT_LEFTDOWN = 0x02,
+            MOUSEEVENT_LEFTUP = 0x04
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        public struct MOUSEINPUT
+        {
+            public int dx;
+            public int dy;
+            public uint mouseData;
+            public MouseEventFlags dwFlags;
+            public uint time;
+            public IntPtr dwExtraInfo;
         }
     }
 }
