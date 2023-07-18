@@ -8,9 +8,13 @@
 using System;
 using System.Timers;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using Gma.System.MouseKeyHook;
 using Railgun.Utils.Classes;
+using MouseEventArgs = System.Windows.Forms.MouseEventArgs;
+using Timer = System.Timers.Timer;
 
 #endregion
 
@@ -24,14 +28,26 @@ namespace Railgun
         private static Timer _timer;
         private static double _cps;
         private static bool _isClick;
+        private static bool _isMouseLmb;
+        private IKeyboardMouseEvents _globalHook;
         private readonly Random _random = new Random();
 
         public MainWindow()
         {
             InitializeComponent();
+            Subscribe();
             _timer = new Timer();
             _timer.Elapsed += Click;
             _timer.AutoReset = true;
+        }
+
+        public void Subscribe()
+        {
+            _globalHook = Hook.GlobalEvents();
+
+            _globalHook.MouseDown += OnMouseDown;
+            _globalHook.MouseUp += OnMouseUp;
+            _globalHook.KeyPress += ToggleKey;
         }
 
         private void Window_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) => DragMove();
@@ -57,7 +73,7 @@ namespace Railgun
 
         private void Click(object sender, ElapsedEventArgs elapsedEventArgs)
         {
-            if (_isClick)
+            if (_isClick && _isMouseLmb)
             {
                 _timer.Interval = 1000 / GetRandomCps();
                 ClickEmulation.SimulateMouseClick();
@@ -80,6 +96,42 @@ namespace Railgun
                     App.ResourceDictionary["Indicator"]["Indicator.On.Background"] as SolidColorBrush;
                 _timer.Enabled = true;
             }
+        }
+
+        private void ToggleKey(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 'f')
+            {
+                if (_isClick == false)
+                {
+                    _isClick = true;
+                    Indicator.Background =
+                        App.ResourceDictionary["Indicator"]["Indicator.On.Background"] as SolidColorBrush;
+                }
+                else if (_isClick)
+                {
+                    _isClick = false;
+                    Indicator.Background =
+                        App.ResourceDictionary["Indicator"]["Indicator.Off.Background"] as SolidColorBrush;
+                }
+
+                if (_timer.Enabled)
+                    _timer.Enabled = false;
+                else if (_timer.Enabled == false)
+                    _timer.Enabled = true;
+            }
+        }
+
+        private static void OnMouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                _isMouseLmb = true;
+        }
+
+        private static void OnMouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+                _isMouseLmb = false;
         }
     }
 }
